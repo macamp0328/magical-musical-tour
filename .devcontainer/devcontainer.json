@@ -35,6 +35,9 @@
               "typescript.tslint.autoFixOnSave": true,
               "editor.formatOnSave": true,
               "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+              "[javascript]": {
+                "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+              },
               "prettier.eslintIntegration": true
             }
         }
