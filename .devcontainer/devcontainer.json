@@ -15,13 +15,27 @@
         {
             "vscode": {
                 "extensions": [
-                    "dbaeumer.vscode-eslint",
-                    "ms-vscode.vscode-typescript-tslint-plugin",
-                    "esbenp.prettier-vscode"
+                  "dbaeumer.vscode-eslint",
+                  "ms-vscode.vscode-typescript-tslint-plugin",
+                  "esbenp.prettier-vscode",
+                  "github.copilot", 
+                  "github.copilot-labs"
                   ]
             },
             "settings": {
-                "terminal.integrated.shell.linux": "/bin/bash"
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "editor.codeActionsOnSave": {
+                  "source.fixAll.eslint": true,
+                  "source.fixAll.tslint": true,
+                  "source.fixAll": true
+              },
+              "eslint.validate": ["javascript", "typescript"],
+              "eslint.autoFixOnSave": true,
+              "eslint.run": "onSave",
+              "typescript.tslint.autoFixOnSave": true,
+              "editor.formatOnSave": true,
+              "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+              "prettier.eslintIntegration": true
             }
         }
     ,
