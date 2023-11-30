@@ -31,10 +31,7 @@
               "eslint.autoFixOnSave": true,
               "eslint.run": "onSave",
               "editor.formatOnSave": true,
-              "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-              "[javascript]": {
-                "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-              },
+              "editor.defaultFormatter": "esbenp.prettier-vscode",
               "prettier.eslintIntegration": true
             }
         }
