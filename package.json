@@ -1,0 +1,19 @@
+{
+    "name": "magical-musical-tour",
+    "version": "1.0.0",
+    "description": "The goal is to provide better musical recommendations based on what you listen to, and to not have a record company paying money to influence an algorithm.",
+    "main": "src/index.js",
+    "scripts": {
+      "start": "node src/index.js",
+      "dev": "ts-node src/index.ts",
+      "build": "tsc"
+    },
+    "keywords": [],
+    "author": "Mr. Miles Camp",
+    "license": "GPL-3.0",
+    "dependencies": {},
+    "devDependencies": {
+      "typescript": "^4.4.3",
+      "ts-node": "^10.2.1"
+    }
+  }
