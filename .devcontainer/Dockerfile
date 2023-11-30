@@ -13,6 +13,9 @@ RUN npm install
 # Install TypeScript globally in the container
 RUN npm install -g typescript
 
+# Install the AWS CDK CLI
+RUN npm install -g aws-cdk
+
 # Copy the current directory contents into the container at /app
 COPY . .
 

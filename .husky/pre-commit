@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo $PATH
+
+bash /workspaces/magical-musical-tour/util_scripts/consolidate_repo.sh

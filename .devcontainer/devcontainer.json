@@ -31,11 +31,11 @@
               "eslint.autoFixOnSave": true,
               "eslint.run": "onSave",
               "editor.formatOnSave": true,
-              "editor.defaultFormatter": "esbenp.prettier-vscode",
-              "prettier.eslintIntegration": true
+              "editor.formatOnSaveTimeout": 5000,
+              "editor.defaultFormatter": "esbenp.prettier-vscode"
             }
         }
     ,
-    "postCreateCommand": "npm install",
+    "postCreateCommand": "/workspaces/magical-musical-tour/.devcontainer/setup.sh",
     "forwardPorts": [3000]
   }
