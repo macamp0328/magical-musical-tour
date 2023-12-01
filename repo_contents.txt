@@ -1,11 +1,37 @@
 
 
 
+===== START OF ./.eslintrc.json =====
+
+File: ./.eslintrc.json
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "rules": {
+        "prettier/prettier": "error"
+    }
+}
+===== END OF ./.eslintrc.json =====
+
+
+
 ===== START OF ./tsconfig.json =====
 
 File: ./tsconfig.json
 Size: 4.0K
-Last Modified: Thu Nov 30 17:26:03 UTC 2023
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
 
 {
     "compilerOptions": {
@@ -22,14 +48,106 @@ Last Modified: Thu Nov 30 17:26:03 UTC 2023
 
 
 
+===== START OF ./.husky/_/husky.sh =====
+
+File: ./.husky/_/husky.sh
+Size: 4.0K
+Last Modified: Fri Dec  1 17:08:46 UTC 2023
+
+#!/usr/bin/env sh
+if [ -z "$husky_skip_init" ]; then
+  debug () {
+    if [ "$HUSKY_DEBUG" = "1" ]; then
+      echo "husky (debug) - $1"
+    fi
+  }
+
+  readonly hook_name="$(basename -- "$0")"
+  debug "starting $hook_name..."
+
+  if [ "$HUSKY" = "0" ]; then
+    debug "HUSKY env variable is set to 0, skipping hook"
+    exit 0
+  fi
+
+  if [ -f ~/.huskyrc ]; then
+    debug "sourcing ~/.huskyrc"
+    . ~/.huskyrc
+  fi
+
+  readonly husky_skip_init=1
+  export husky_skip_init
+  sh -e "$0" "$@"
+  exitCode="$?"
+
+  if [ $exitCode != 0 ]; then
+    echo "husky - $hook_name hook exited with code $exitCode (error)"
+  fi
+
+  if [ $exitCode = 127 ]; then
+    echo "husky - command not found in PATH=$PATH"
+  fi
+
+  exit $exitCode
+fi
+
+===== END OF ./.husky/_/husky.sh =====
+
+
+
+===== START OF ./.husky/pre-commit =====
+
+File: ./.husky/pre-commit
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+bash /workspaces/magical-musical-tour/util_scripts/consolidate_repo.sh
+
+===== END OF ./.husky/pre-commit =====
+
+
+
 ===== START OF ./README.md =====
 
 File: ./README.md
 Size: 4.0K
-Last Modified: Thu Nov 30 17:26:03 UTC 2023
+Last Modified: Fri Dec  1 17:00:31 UTC 2023
 
-# magical-musical-tour
-The goal is to provide better musical recommendations based on what you listen to, and to not have a record company paying money to influence an algorithm
+# Magical Musical Tour
+
+The goal of this project is to provide better musical recommendations based on what you listen to, without the influence of record companies paying money to influence an algorithm. This is a personal project, aimed at practicing bringing ideas to life. It will not be monetized and doesn't need to scale.
+
+## Project Structure
+
+This project is structured as a monorepo, leaning heavily on chatgpt and copilot. All infrastructure is managed using Infrastructure as Code (IaC) principles.
+
+## Getting Started
+
+### Prerequisites
+
+- List of software/tools needed
+- Any other prerequisites
+
+### Installation
+
+1. Step 1
+2. Step 2
+3. ...
+
+## Usage
+
+Provide instructions on how to use your project.
+
+## Contributing
+
+As this is a personal project, contributions may not be necessary. However, if you have any suggestions or feedback, feel free to open an issue.
+
+## License
+
+This project is licensed under the [GPL-3.0](LICENSE) License - see the [LICENSE](LICENSE) file for details.
 
 ===== END OF ./README.md =====
 
@@ -39,20 +157,21 @@ The goal is to provide better musical recommendations based on what you listen t
 
 File: ./package.json
 Size: 4.0K
-Last Modified: Thu Nov 30 18:14:05 UTC 2023
+Last Modified: Fri Dec  1 17:08:37 UTC 2023
 
 {
   "name": "magical-musical-tour",
   "version": "1.0.0",
   "description": "The goal is to provide better musical recommendations based on what you listen to, and to not have a record company paying money to influence an algorithm.",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/index.ts",
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
-    "test-precommit": "sh .husky/pre-commit"
+    "test-precommit": "sh .husky/pre-commit",
+    "postinstall": "husky install"
   },
   "keywords": [],
   "author": "Mr. Miles Camp",
@@ -91,11 +210,27 @@ Last Modified: Thu Nov 30 18:14:05 UTC 2023
 
 
 
+===== START OF ./.prettierrc =====
+
+File: ./.prettierrc
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+{
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 80,
+    "tabWidth": 2
+}
+===== END OF ./.prettierrc =====
+
+
+
 ===== START OF ./commitlint.config.js =====
 
 File: ./commitlint.config.js
 Size: 4.0K
-Last Modified: Thu Nov 30 18:03:43 UTC 2023
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
 
 module.exports = {
   extends: ['@commitlint/config-conventional'],
@@ -105,11 +240,123 @@ module.exports = {
 
 
 
+===== START OF ./.devcontainer/devcontainer.json =====
+
+File: ./.devcontainer/devcontainer.json
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+{
+    "name": "Magical Musical Tour",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "..",
+      "args": { 
+        "VARIANT": "14"
+      }
+    },
+    "runArgs": [
+      "-u",
+      "node"
+    ],
+    "customizations":
+        {
+            "vscode": {
+                "extensions": [
+                  "dbaeumer.vscode-eslint",
+                  "esbenp.prettier-vscode",
+                  "github.copilot", 
+                  "github.copilot-labs"
+                  ]
+            },
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "editor.codeActionsOnSave": {
+                  "source.fixAll.eslint": true,
+                  "source.fixAll": true
+              },
+              "eslint.validate": ["javascript", "typescript"],
+              "eslint.autoFixOnSave": true,
+              "eslint.run": "onSave",
+              "editor.formatOnSave": true,
+              "editor.formatOnSaveTimeout": 5000,
+              "editor.defaultFormatter": "esbenp.prettier-vscode"
+            }
+        }
+    ,
+    "postCreateCommand": "npm install",
+    "forwardPorts": [3000]
+  }
+===== END OF ./.devcontainer/devcontainer.json =====
+
+
+
+===== START OF ./.devcontainer/Dockerfile =====
+
+File: ./.devcontainer/Dockerfile
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+# Use an official Node.js runtime as the base image
+FROM node:14
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Copy package.json and package-lock.json into the directory
+COPY package*.json ./
+
+# Install any needed packages specified in package.json
+RUN npm install
+
+# Install TypeScript globally in the container
+RUN npm install -g typescript
+
+# Install the AWS CDK CLI
+RUN npm install -g aws-cdk
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Make your script executable
+# RUN chmod +x /workspaces/magical-musical-tour/util_scripts/consolidate_repo.sh
+
+# Compile TypeScript into JavaScript
+RUN tsc
+
+# Make port 3000 available to the world outside this container
+EXPOSE 3000
+
+# Run the app when the container launches
+CMD ["npm", "start"]
+===== END OF ./.devcontainer/Dockerfile =====
+
+
+
+===== START OF ./.devcontainer/setup.sh =====
+
+File: ./.devcontainer/setup.sh
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+#!/bin/bash
+
+# Make your script executable
+chmod +x /workspaces/magical-musical-tour/util_scripts/consolidate_repo.sh
+
+npm install
+
+# Other setup commands...
+
+===== END OF ./.devcontainer/setup.sh =====
+
+
+
 ===== START OF ./src/index.ts =====
 
 File: ./src/index.ts
 Size: 4.0K
-Last Modified: Thu Nov 30 18:04:02 UTC 2023
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
 
 console.log('Hello, world!')
 
@@ -122,7 +369,7 @@ console.log('Hello, world!')
 
 File: ./LICENSE
 Size: 36K
-Last Modified: Thu Nov 30 17:26:03 UTC 2023
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
@@ -229,11 +476,37 @@ parties to make or receive copies.  Mere interaction with a user through
 
 
 
+===== START OF ./util_scripts/.consolidateignore =====
+
+File: ./util_scripts/.consolidateignore
+Size: 4.0K
+Last Modified: Fri Dec  1 16:41:07 UTC 2023
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore package-lock.json file
+package-lock.json
+
+# Ignore .git directory
+.git/
+
+# Ignore other directories and files as needed
+# For example, dist folder, if you have one
+dist/
+
+# Add any other build or dependency directories
+# that you don't want to include in your consolidation
+*.log
+===== END OF ./util_scripts/.consolidateignore =====
+
+
+
 ===== START OF ./util_scripts/consolidate_repo.sh =====
 
 File: ./util_scripts/consolidate_repo.sh
 Size: 4.0K
-Last Modified: Fri Dec  1 00:54:43 UTC 2023
+Last Modified: Fri Dec  1 17:06:40 UTC 2023
 
 #!/bin/bash
 
@@ -280,7 +553,7 @@ should_ignore() {
 }
 
 # Loop through all files, check if they should be ignored, and concatenate
-find . -type f -not -path '*/\.*' -not -name "$OUTPUT_FILE" -print0 | while IFS= read -r -d $'\0' file; do
+find . -type f -not -name "$OUTPUT_FILE" -print0 | while IFS= read -r -d $'\0' file; do
   if ! should_ignore "$file"; then
     echo -e "\n\n===== START OF $file =====\n" >> "$OUTPUT_FILE"
     echo -e "File: $file" >> "$OUTPUT_FILE"

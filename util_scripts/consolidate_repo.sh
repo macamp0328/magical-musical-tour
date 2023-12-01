@@ -43,7 +43,7 @@ should_ignore() {
 }
 
 # Loop through all files, check if they should be ignored, and concatenate
-find . -type f -not -path '*/\.*' -not -name "$OUTPUT_FILE" -print0 | while IFS= read -r -d $'\0' file; do
+find . -type f -not -name "$OUTPUT_FILE" -print0 | while IFS= read -r -d $'\0' file; do
   if ! should_ignore "$file"; then
     echo -e "\n\n===== START OF $file =====\n" >> "$OUTPUT_FILE"
     echo -e "File: $file" >> "$OUTPUT_FILE"

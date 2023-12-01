@@ -9,7 +9,8 @@
     "build": "tsc",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
-    "test-precommit": "sh .husky/pre-commit"
+    "test-precommit": "sh .husky/pre-commit",
+    "postinstall": "husky install"
   },
   "keywords": [],
   "author": "Mr. Miles Camp",
