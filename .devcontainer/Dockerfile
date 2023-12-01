@@ -19,6 +19,9 @@ RUN npm install -g aws-cdk
 # Copy the current directory contents into the container at /app
 COPY . .
 
+# Make your script executable
+# RUN chmod +x /workspaces/magical-musical-tour/util_scripts/consolidate_repo.sh
+
 # Compile TypeScript into JavaScript
 RUN tsc
 

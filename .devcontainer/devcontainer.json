@@ -36,6 +36,6 @@
             }
         }
     ,
-    "postCreateCommand": "/workspaces/magical-musical-tour/.devcontainer/setup.sh",
+    "postCreateCommand": "npm install",
     "forwardPorts": [3000]
   }
